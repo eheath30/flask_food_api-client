@@ -12,8 +12,13 @@ async function fetchData() {
 }
 
 function submitFormData(e) {
+  e.preventDefault()
   axios.post('http://127.0.0.1:5000/api/food', {
     name: NewFood
+  })
+  .then(()=>{
+    fetchData()
+    e.target.reset()
   })
   .catch(function (error) {
     console.log(error);
@@ -27,6 +32,9 @@ useEffect(() => {
 function deleteEntry(e) {
   let id = e.target.parentElement.id
   axios.delete(`http://127.0.0.1:5000/api/food/${id}`)
+  .then(()=>{
+    fetchData()
+  })
   .catch(function (error) {
     console.log(error);
   });
@@ -39,7 +47,7 @@ function foodListFunction() {
     <section id={item.id} key={item.id} className="d-flex flex-row m-1">
     <div className="mx-1">{item.id}: </div>
     <div className="mx-1">{item.name}</div>
-    <button className="btn btn-warning btn-sm">🖊</button>
+    {/* <button className="btn btn-warning btn-sm">🖊</button> */}
     <button className="mx-1 btn btn-danger btn-sm" onClick={deleteEntry}>X</button>
     </section>
   ))
