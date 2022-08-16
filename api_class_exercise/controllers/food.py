@@ -44,4 +44,4 @@ def find_by_uid(uid):
     try:
         return next(dish for dish in foods if dish['id'] == uid)
     except:
-        raise BadRequest(f"We don't have that cat with id {uid}!")
+        raise BadRequest(f"We don't have that food with id {uid}!")
